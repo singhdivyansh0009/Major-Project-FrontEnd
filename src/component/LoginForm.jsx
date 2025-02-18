@@ -18,37 +18,46 @@ const LoginForm = ({ login }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4">
-      <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-sm">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div className="flex justify-center mb-6">
-          <div className="bg-gray-200 p-4 rounded-full">
-            <FaLock className="text-5xl text-red-500" />
+          <div className="bg-gray-100 p-4 rounded-full">
+            <FaLock className="text-4xl text-red-500" />
           </div>
         </div>
-        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email"
-            className="p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 w-full"
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Password"
-            className="p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 w-full"
-            required
-          />
+        <h2 className="text-2xl font-semibold text-center text-gray-700 mb-4">Login to Your Account</h2>
+        <form className="space-y-5" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-600">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              className="mt-1 p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-600">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              className="mt-1 p-3 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
           <button
             type="submit"
-            className="mt-4 bg-red-500 text-white py-3 rounded-full hover:bg-red-600 transition w-full"
+            className="w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition duration-300"
           >
-            LOGIN
+            Login
           </button>
         </form>
       </div>
