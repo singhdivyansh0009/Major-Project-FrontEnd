@@ -1,8 +1,9 @@
 import { FaHome, FaThLarge, FaCalendarAlt } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Helper to determine if the path is active
   const isActive = (path) => location.pathname === path;
@@ -13,19 +14,19 @@ const Footer = () => {
       style={{ maxWidth: '420px' }}
     >
       {/* Home */}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center cursor-pointer" onClick={() => navigate('/home')}>
         <FaHome className={`text-xl ${isActive('/home') ? 'text-yellow-200' : 'text-white'}`} />
         <span className={`text-xs ${isActive('/home') ? 'text-yellow-200' : 'text-white'}`}>HOME</span>
       </div>
 
       {/* Dashboard */}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center cursor-pointer"  onClick={() => navigate('/dashboard')}>
         <FaThLarge className={`text-xl ${isActive('/dashboard') ? 'text-yellow-300' : 'text-white'}`} />
         <span className={`text-xs ${isActive('/dashboard') ? 'text-yellow-300' : 'text-white'}`}>DASHBOARD</span>
       </div>
 
       {/* Attendance */}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center cursor-pointer" onClick={() => navigate('/attendence')}>
         <FaCalendarAlt className={`text-xl ${isActive('/attendance') ? 'text-yellow-300' : 'text-white'}`} />
         <span className={`text-xs ${isActive('/attendance') ? 'text-yellow-300' : 'text-white'}`}>ATTENDANCE</span>
       </div>

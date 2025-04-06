@@ -3,13 +3,36 @@ import Footer from "../component/Footer";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { CiClock2 } from "react-icons/ci";
 import { IoIosAnalytics } from "react-icons/io";
+import {useEffect,useState } from "react";
+
 
 const Home = () => {
+  
+  const [location,setLocation] = useState({latitude:0,longitude:0});
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log("Latitude:", latitude);
+          console.log("Longitude:", longitude);
+        
+          setLocation({latitude,longitude});
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
   return (
     <>
-      {/* <HomeComponent/>
-            <Footer/> */}
-      <div className="bg-gray-50 min-h-screen flex flex-col">
+      <HomeComponent location={location}/>
+            <Footer/>
+      {/* <div className="bg-gray-50 min-h-screen flex flex-col">
         <section className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-12 px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Revolutionize Attendance Management
@@ -129,7 +152,7 @@ const Home = () => {
         <footer className="bg-gray-800 text-white py-6 px-6 text-center">
           <p>&copy; 2025 Attendance Management System. All Rights Reserved.</p>
         </footer>
-      </div>
+      </div> */}
     </>
   );
 };

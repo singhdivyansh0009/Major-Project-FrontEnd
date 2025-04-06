@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect , useContext} from 'react';
 import { FaUserCircle, FaClock, FaSyncAlt } from 'react-icons/fa';
 import faceScan from '../assets/face-scan.png'; // Import the face scan image
 import { getCurrentDate } from '../utils';
 import useCurrentTime from '../hooks/currentTime';
+import axios from 'axios';
+import { useState } from 'react';
+import { AuthContext } from '../context/Authcontext';
+const Home = ({location}) => {
+  const {user} = useContext(AuthContext);
+  const [isInside, setIsInside] = useState(false);
 
-const Home = () => {
+  useEffect(() => {
+    axios.post("http://localhost:8080/api/v1/geofence/check", location)
+    .then((res) => {
+      console.log("Location:", res.data);
+      setIsInside(res.data.isInside);
+    }).catch((error) => {
+      console.error("Error getting location:", error);  
+    });
+  }, [location]);
   return (
     <div
       className="min-h-screen bg-gray-100 flex flex-col items-center p-4 md:p-6 mx-auto"
@@ -15,18 +29,24 @@ const Home = () => {
         <div className="flex items-center gap-3">
           <FaUserCircle className="text-4xl text-blue-500" />
           <div>
-            <h2 className="text-lg font-bold">HI HARSHIT</h2>
-            <p className="text-sm text-gray-500">MZ001234</p>
+            <h2 className="text-lg font-bold">{user?.name.toUpperCase()}</h2>
+            <p className="text-sm text-gray-500">{user?.email}</p>
           </div>
         </div>
-        <FaSyncAlt className="text-xl text-red-500 cursor-pointer" />
+        <p className="text-red-500 font-semibold cursor-pointer">Logout</p>
       </div>
 
       {/* Time */}
       <div className="text-center mb-6 mt-8">
         <h1 className="text-4xl font-bold">{useCurrentTime()}</h1>
         <p className="text-sm text-gray-500">{getCurrentDate()}</p>
+        <p className={`text-sm ${isInside ?'text-green-500':'text-red-500'}`}>
+            {
+              isInside ? "You are inside the campus" : "You are outside the campus"
+            }
+        </p>
       </div>
+      
 
       {/* Check-In */}
       <div className="flex justify-center mb-6">

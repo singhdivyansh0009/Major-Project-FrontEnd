@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
+import AnalyticsCard from './AnalyticsCard';
 
-const DailyAttendence = () => {
-  const [selectedDate, setSelectedDate] = useState('6');
-
+const DailyAttendence = (attendence) => {
+   console.log(attendence)
   const days = [
-    { date: '06', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-green-500' },
-    { date: '07', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-yellow-500' },
-    { date: '08', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-red-500' },
-    { date: '09', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-green-500' },
-    { date: '06', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-green-500' },
-    { date: '07', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-yellow-500' },
-    { date: '08', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-red-500' },
-    { date: '09', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-green-500' },
-    { date: '06', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-green-500' },
-    { date: '07', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-yellow-500' },
-    { date: '08', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-red-500' },
-    { date: '09', day: 'TUE', punchIn: '09:08 AM', punchOut: '06:05 PM', total: '08:13', color: 'bg-green-500' },
+    { date: '01', day: 'SAT', punchIn: '09:05 AM', punchOut: '05:55 PM', total: '08:50', color: 'bg-green-500' },
+    { date: '02', day: 'SUN', punchIn: '09:10 AM', punchOut: '06:00 PM', total: '08:50', color: 'bg-green-500' },
+    { date: '03', day: 'MON', punchIn: '09:15 AM', punchOut: '06:05 PM', total: '08:50', color: 'bg-yellow-500' },
+    { date: '04', day: 'TUE', punchIn: '09:20 AM', punchOut: '06:10 PM', total: '08:50', color: 'bg-yellow-500' },
+    { date: '05', day: 'WED', punchIn: '09:25 AM', punchOut: '06:15 PM', total: '08:50', color: 'bg-red-500' },
+    { date: '06', day: 'THU', punchIn: '09:30 AM', punchOut: '06:20 PM', total: '08:50', color: 'bg-red-500' },
+    { date: '07', day: 'FRI', punchIn: '09:35 AM', punchOut: '06:25 PM', total: '08:50', color: 'bg-yellow-500' },
+    { date: '08', day: 'SAT', punchIn: '09:40 AM', punchOut: '06:30 PM', total: '08:50', color: 'bg-yellow-500' },
+    { date: '09', day: 'SUN', punchIn: '09:45 AM', punchOut: '06:35 PM', total: '08:50', color: 'bg-red-500' },
+    { date: '10', day: 'MON', punchIn: '09:50 AM', punchOut: '06:40 PM', total: '08:50', color: 'bg-green-500' },
+    { date: '11', day: 'TUE', punchIn: '09:55 AM', punchOut: '06:45 PM', total: '08:50', color: 'bg-red-500' },
+    { date: '12', day: 'WED', punchIn: '10:00 AM', punchOut: '06:50 PM', total: '08:50', color: 'bg-green-500' },
+    { date: '13', day: 'THU', punchIn: '10:05 AM', punchOut: '06:55 PM', total: '08:50', color: 'bg-red-500' },
+    { date: '14', day: 'FRI', punchIn: '10:10 AM', punchOut: '07:00 PM', total: '08:50', color: 'bg-red-500' },
+    { date: '15', day: 'SAT', punchIn: '10:15 AM', punchOut: '07:05 PM', total: '08:50', color: 'bg-red-500' },
   ];
-
+  
   return (
     <div className="min-h-screen bg-gray-100 p-4 flex flex-col items-center max-w-md mx-auto" style={{ maxWidth: '420px' }}>
       {/* Header */}
       <h2 className="text-xl font-bold mb-4 self-start">Attendance History</h2>
+      {/*Analytics Card*/}
+      <AnalyticsCard/>
       {/* Attendance Records */}
       <div className="w-full flex flex-col gap-3 mb-16">
         {days.map((day) => (

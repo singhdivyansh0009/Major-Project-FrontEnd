@@ -3,68 +3,58 @@ import { SlCalender } from "react-icons/sl";
 import { TbReportAnalytics } from "react-icons/tb";
 import { SiGoogleclassroom } from "react-icons/si";
 import { PiStudentBold } from "react-icons/pi";
-
-function Dashboard(props) {
+import Footer from "../component/Footer";
+import { useNavigate } from "react-router-dom";
+function Dashboard() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Header */}
       <div className="flex bg-white border-b border-b-gray-200 justify-between items-center p-5">
-        <p className="text-2xl font-semibold text-black">Dashboard</p>
+        <p className="text-lg md:text-2xl font-semibold text-black">Dashboard</p>
         <p className="text-red-500 font-semibold cursor-pointer">Logout</p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-5 gap-y-10 mt-24 p-5 bg-grid-pattern">
-        <div className="flex flex-col gap-y-4 text-center bg-white border border-gray-200 items-center shadow-md w-fit p-5 rounded-md">
-          <div className="bg-pink-100 w-fit p-5 rounded-xl shadow-md">
-            <SlCalender />
-          </div>
-          <div className="flex items-center">
-            <p className="font-semibold">Daily Attendance</p>
-          </div>
-        </div>
-        <div className="flex flex-col gap-y-4 bg-white border border-gray-200 items-center shadow-md p-5 rounded-md">
-          <div className="bg-pink-100 w-fit p-5 rounded-xl shadow-md">
-            <TbReportAnalytics />
-          </div>
-          <div className="flex items-center">
-            <p className="font-semibold">Analytics</p>
-          </div>
-        </div>
-        <div className="flex flex-col gap-y-4 bg-white border border-gray-200 items-center text-center shadow-md p-5 rounded-md">
+      {/* Grid Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-16 p-5">
+        {/* Daily Attendance */}
+        <div className="flex flex-col gap-y-4 text-center bg-white border border-gray-200 items-center shadow-md w-full md:w-auto p-5 rounded-md">
           <div className="bg-pink-100 p-5 rounded-xl shadow-md">
-            <PiStudentBold />
+            <SlCalender className="text-2xl md:text-3xl" />
           </div>
-          <p className="font-semibold">Student Attendance</p>
+          <p className="font-semibold text-sm md:text-base">Daily Attendance</p>
         </div>
-        <div className="flex flex-col gap-y-4 bg-white border border-gray-200 items-center text-center shadow-md p-5 rounded-md">
-          <div className="bg-pink-100 w-fit p-5 rounded-xl shadow-md">
-            <SiGoogleclassroom />
+
+        {/* Analytics */}
+        <div className="flex flex-col gap-y-4 bg-white border border-gray-200 items-center shadow-md w-full md:w-auto p-5 rounded-md">
+          <div className="bg-pink-100 p-5 rounded-xl shadow-md">
+            <TbReportAnalytics className="text-2xl md:text-3xl" />
           </div>
-          <div className="flex items-center">
-            <p className="font-semibold">Lecture Attendance</p>
+          <p className="font-semibold text-sm md:text-base">Analytics</p>
+        </div>
+
+        {/* Student Attendance */}
+        <div className="flex flex-col gap-y-4 bg-white border border-gray-200
+                       items-center text-center shadow-md w-full md:w-auto p-5 rounded-md cursor-pointer" 
+                       onClick={() => navigate("/student-attendence")}
+        >
+          <div className="bg-pink-100 p-5 rounded-xl shadow-md">
+            <PiStudentBold className="text-2xl md:text-3xl" />
           </div>
+          <p className="font-semibold text-sm md:text-base">Student Attendance</p>
+        </div>
+
+        {/* Lecture Attendance */}
+        <div className="flex flex-col gap-y-4 bg-white border border-gray-200 items-center text-center shadow-md w-full md:w-auto p-5 rounded-md">
+          <div className="bg-pink-100 p-5 rounded-xl shadow-md">
+            <SiGoogleclassroom className="text-2xl md:text-3xl" />
+          </div>
+          <p className="font-semibold text-sm md:text-base">Lecture Attendance</p>
         </div>
       </div>
 
-      <div className="fixed bottom-0 bg-white border-t border-t-gray-200 left-0 right-0 text-black p-4 shadow-lg">
-        <div className="grid grid-cols-4 gap-4 text-center">
-          <div className="flex flex-col items-center">
-            <SlCalender className="text-2xl" />
-            <p className="text-xs">Attendance</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <TbReportAnalytics className="text-2xl" />
-            <p className="text-xs">Analytics</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <SiGoogleclassroom className="text-2xl" />
-            <p className="text-xs">Lectures</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <PiStudentBold className="text-2xl" />
-            <p className="text-xs">Students</p>
-          </div>
-        </div>
-      </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
