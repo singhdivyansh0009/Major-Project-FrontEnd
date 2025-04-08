@@ -8,7 +8,7 @@ const Login = () => {
   const {login} = useContext(AuthContext);
   const handleLogin = (data) => {
     axios
-      .post(`http://localhost:4000/api/v1/auth/login`, data)
+      .post(`http://localhost:4000/api/v1/auth/login`, data,{withCredentials:true})
       .then((res) => {
         console.log(res);
         login(res.data.user);

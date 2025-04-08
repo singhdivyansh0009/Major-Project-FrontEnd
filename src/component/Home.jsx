@@ -6,9 +6,11 @@ import useCurrentTime from '../hooks/currentTime';
 import axios from 'axios';
 import { useState } from 'react';
 import { AuthContext } from '../context/Authcontext';
+import { useNavigate } from 'react-router-dom';
 const Home = ({location}) => {
   const {user} = useContext(AuthContext);
   const [isInside, setIsInside] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.post("http://localhost:8080/api/v1/geofence/check", location)
@@ -19,6 +21,21 @@ const Home = ({location}) => {
       console.error("Error getting location:", error);  
     });
   }, [location]);
+
+  const handleLogout = () => {
+    axios.post("http://localhost:4000/api/v1/auth/logout",{},{withCredentials:true})
+    .then((res) => {  
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    alert(res.data.message);
+    navigate('/');
+    })
+    .catch((error) => { 
+      console.error("Error logging out:", error);
+      alert("Logout failed. Please try again.");
+    });
+    
+  }
   return (
     <div
       className="min-h-screen bg-gray-100 flex flex-col items-center p-4 md:p-6 mx-auto"
@@ -27,13 +44,17 @@ const Home = ({location}) => {
       {/* Header */}
       <div className="w-full flex justify-between items-center mb-6">
         <div className="flex items-center gap-3">
-          <FaUserCircle className="text-4xl text-blue-500" />
+          {
+            user?.avatar ?
+            <img src={user?.avatar} alt="User Avatar" className="w-16 h-16 rounded-full" /> :
+            <FaUserCircle className="text-4xl text-blue-500" />
+          }
           <div>
             <h2 className="text-lg font-bold">{user?.name.toUpperCase()}</h2>
             <p className="text-sm text-gray-500">{user?.email}</p>
           </div>
         </div>
-        <p className="text-red-500 font-semibold cursor-pointer">Logout</p>
+        <p className="text-red-500 font-semibold cursor-pointer" onClick={handleLogout}>Logout</p>
       </div>
 
       {/* Time */}

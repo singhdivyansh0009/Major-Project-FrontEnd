@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaLock } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const LoginForm = ({ login }) => {
   const [formData, setFormData] = useState({
@@ -59,7 +60,7 @@ const LoginForm = ({ login }) => {
           >
             Login
           </button>
-          
+          <p className='flex items-center justify-center'>new user? <Link to="/register" className='font-medium text-blue-600'>Register</Link></p>
         </form>
       </div>
     </div>
